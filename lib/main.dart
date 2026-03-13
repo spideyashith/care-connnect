@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+
 import 'services/supabase_service.dart';
+import 'features/auth/login_screen.dart';
+import 'features/auth/role_selection_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,26 +24,22 @@ class CareConnectApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const SplashScreen(),
+      home: const AuthCheckScreen(),
     );
   }
 }
 
-class SplashScreen extends StatelessWidget {
-  const SplashScreen({super.key});
+class AuthCheckScreen extends StatelessWidget {
+  const AuthCheckScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
-        child: Text(
-          "CareConnect",
-          style: TextStyle(
-            fontSize: 32,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      ),
-    );
+    final session = Supabase.instance.client.auth.currentSession;
+
+    if (session != null) {
+      return const RoleSelectionScreen();
+    } else {
+      return const LoginScreen();
+    }
   }
 }
