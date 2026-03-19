@@ -5,6 +5,7 @@ import 'services/supabase_service.dart';
 import 'features/auth/login_screen.dart';
 import 'features/auth/role_selection_screen.dart';
 
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -34,12 +35,14 @@ class AuthCheckScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     final session = Supabase.instance.client.auth.currentSession;
 
     if (session != null) {
-      return const RoleSelectionScreen();
+      return RoleSelectionScreen();
     } else {
       return const LoginScreen();
     }
+
   }
 }

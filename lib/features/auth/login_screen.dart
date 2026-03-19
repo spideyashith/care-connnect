@@ -3,6 +3,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'register_screen.dart';
 import 'role_selection_screen.dart';
 
+
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
@@ -35,7 +36,7 @@ class _LoginScreenState extends State<LoginScreen> {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => const RoleSelectionScreen(),
+          builder: (context) => RoleSelectionScreen(),
         ),
       );
 

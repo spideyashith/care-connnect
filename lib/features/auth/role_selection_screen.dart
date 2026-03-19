@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
-import '../dashboard/patient_dashboard.dart';
-import '../dashboard/caregiver_dashboard.dart';
-import '../dashboard/doctor_dashboard.dart';
+import '../patient/patient_dashboard.dart';
 
 class RoleSelectionScreen extends StatelessWidget {
   const RoleSelectionScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Select Your Role"),
         centerTitle: true,
       ),
+
       body: Padding(
         padding: const EdgeInsets.all(20),
+
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -32,12 +33,14 @@ class RoleSelectionScreen extends StatelessWidget {
               height: 60,
               child: ElevatedButton(
                 onPressed: () {
+
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
                       builder: (context) => const PatientDashboard(),
                     ),
                   );
+
                 },
                 child: const Text("Patient"),
               ),
@@ -49,14 +52,7 @@ class RoleSelectionScreen extends StatelessWidget {
               width: double.infinity,
               height: 60,
               child: ElevatedButton(
-                onPressed: () {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const CaregiverDashboard(),
-                    ),
-                  );
-                },
+                onPressed: () {},
                 child: const Text("Caregiver"),
               ),
             ),
@@ -67,14 +63,7 @@ class RoleSelectionScreen extends StatelessWidget {
               width: double.infinity,
               height: 60,
               child: ElevatedButton(
-                onPressed: () {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const DoctorDashboard(),
-                    ),
-                  );
-                },
+                onPressed: () {},
                 child: const Text("Doctor"),
               ),
             ),
