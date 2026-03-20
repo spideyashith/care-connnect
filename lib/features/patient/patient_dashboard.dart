@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:supabase_flutter/supabase_flutter.dart';
+
+import '../auth/login_screen.dart';
 import 'cognitive_history_screen.dart';
 
 class PatientDashboard extends StatefulWidget {
@@ -213,6 +215,19 @@ class _PatientDashboardState extends State<PatientDashboard> {
     return Colors.red;
   }
 
+  Future<void> logout() async {
+
+    await supabase.auth.signOut();
+
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const LoginScreen(),
+      ),
+          (route) => false,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
 
@@ -220,6 +235,15 @@ class _PatientDashboardState extends State<PatientDashboard> {
 
       appBar: AppBar(
         title: const Text("Patient Dashboard"),
+
+        actions: [
+
+          IconButton(
+            icon: const Icon(Icons.logout),
+            onPressed: logout,
+          )
+
+        ],
       ),
 
       body: Padding(
@@ -228,6 +252,7 @@ class _PatientDashboardState extends State<PatientDashboard> {
         child: Column(
           children: [
 
+            /// STATUS CARD
             Container(
               width: double.infinity,
               padding: const EdgeInsets.all(16),
@@ -264,6 +289,7 @@ class _PatientDashboardState extends State<PatientDashboard> {
 
             const SizedBox(height: 25),
 
+            /// DASHBOARD GRID
             Expanded(
               child: GridView.count(
                 crossAxisCount: 2,
@@ -274,7 +300,6 @@ class _PatientDashboardState extends State<PatientDashboard> {
 
                   GestureDetector(
                     onTap: startGame,
-
                     child: buildCard(
                       Icons.psychology,
                       "Cognitive Test",
@@ -304,7 +329,6 @@ class _PatientDashboardState extends State<PatientDashboard> {
 
                   GestureDetector(
                     onTap: sendEmergencyAlert,
-
                     child: buildCard(
                       Icons.warning,
                       "Emergency Alert",
@@ -322,6 +346,7 @@ class _PatientDashboardState extends State<PatientDashboard> {
               ),
             ),
 
+            /// GAME SECTION
             if (gameStarted) ...[
 
               const SizedBox(height: 10),
